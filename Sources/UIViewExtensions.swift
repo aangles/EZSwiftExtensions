@@ -22,7 +22,7 @@ extension UIView {
 
     /// EZSwiftExtensions - Copies size of superview
     public convenience init(superView: UIView) {
-        self.init(frame: CGRect(origin: CGPoint.zero, size: superView.size))
+        self.init(frame: CGRect(origin: CGPoint.zero, size: superView.aSize))
     }
 }
 
@@ -181,7 +181,7 @@ extension UIView {
     }
 
     /// EZSwiftExtensions
-    public var size: CGSize {
+    public var aSize: CGSize {
         get {
             return self.frame.size
         } set(value) {

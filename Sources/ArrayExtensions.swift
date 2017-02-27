@@ -133,7 +133,7 @@ extension Array where Element: Equatable {
     }
 
     // EZSE: Removes all occurrences of the given object
-    public mutating func removeAll(_ elements: Element...) {
+    public mutating func removeAllElements(_ elements: Element...) {
         for element in elements {
             for index in self.indexes(of: element).reversed() {
                 self.remove(at: index)
@@ -236,7 +236,7 @@ extension Array where Element: Equatable {
     /// EZSE: Removes all occurrences of the given object
     @available(*, deprecated: 1.8, renamed: "removeAll(_:)")
     public mutating func removeObjects(_ objects: Element...) {
-        objects.forEach { self.removeAll($0) }
+        objects.forEach { self.removeAllElements($0) }
     }
 
 }
