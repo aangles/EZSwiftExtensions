@@ -13,7 +13,7 @@ class DateTests: XCTestCase {
 
     var string: String!
     var wrongDateString: String!
-    let format = "dd-mm-yyyy hh:mm:ss"
+    let format = "dd-MM-yyyy hh:mm:ss"
 
     override func setUp() {
         super.setUp()
@@ -132,6 +132,22 @@ class DateTests: XCTestCase {
         XCTAssertTrue(hours.timePassed().contains("hours"))
         XCTAssertTrue(minutes.timePassed().contains("minutes"))
         XCTAssertTrue(now.timePassed().contains("now") || now.timePassed().contains("seconds"))
+        
+        let today = Date()
+        let yesterday = Calendar.current.date(byAdding: .day, value: -1,to: today)
+        XCTAssertEqual(yesterday?.timePassed(), "1 day ago")
+        
+        let fiveSecondsAgo = Calendar.current.date(byAdding: .second, value: -5,to: today)
+        XCTAssertEqual(fiveSecondsAgo?.timePassed(), "5 seconds ago")
+        
+        let sixHoursAgo = Calendar.current.date(byAdding: .hour, value: -6,to: today)
+        XCTAssertEqual(sixHoursAgo?.timePassed(), "6 hours ago")
+        
+        let twoMonthsAgo = Calendar.current.date(byAdding: .month, value: -2,to: today)
+        XCTAssertEqual(twoMonthsAgo?.timePassed(), "2 months ago")
+        
+        let fifteenYearsAgo = Calendar.current.date(byAdding: .year, value: -15,to: today)
+        XCTAssertEqual(fifteenYearsAgo?.timePassed(), "15 years ago")
     }
     
     func testIsPast() {
@@ -230,6 +246,12 @@ class DateTests: XCTestCase {
     func testMonthAsString() {
         let customDate = Date(fromString: "09-01-2015 05:45:12", format: self.format)
         XCTAssertEqual(customDate?.monthAsString, "January")
+        
+        let customDate2 = Date(fromString: "10-03-2009 05:45:12", format: self.format)
+        XCTAssertEqual(customDate2?.monthAsString, "March")
+        
+        let customDate3 = Date(fromString: "11-11-2012 05:45:12", format: self.format)
+        XCTAssertEqual(customDate3?.monthAsString, "November")
     }
     
     func testWeekDay() {
